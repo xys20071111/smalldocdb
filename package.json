@@ -13,5 +13,8 @@
   },
   "scripts": {
     "prepack": "tsc"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

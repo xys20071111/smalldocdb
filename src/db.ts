@@ -5,7 +5,11 @@ export default class Database {
     private data: Map<string, any> = new Map<string, any>()
     constructor(path: string) {
         this.path = path
-        this.jsonStr = fs.readFileSync(path, { encoding: 'utf8' }).toString()
+        if(fs.existsSync(path)){
+            this.jsonStr = fs.readFileSync(path,{encoding:'utf-8'})
+        }else{
+            this.jsonStr = '{}'
+        }
         try {
             const dataObject = JSON.parse(this.jsonStr)
             for (const key in dataObject) {
