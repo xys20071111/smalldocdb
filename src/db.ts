@@ -1,4 +1,4 @@
-import fs from 'fs'
+import * as fs from 'fs'
 export default class Database {
     private path: string
     private jsonStr: string
