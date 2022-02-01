@@ -1,13 +1,13 @@
 import * as fs from 'fs'
-export default class Database {
+export default class {
     private path: string
     private jsonStr: string
     private data: Map<string, any> = new Map<string, any>()
     constructor(path: string) {
         this.path = path
-        if(fs.existsSync(path)){
-            this.jsonStr = fs.readFileSync(path,{encoding:'utf-8'})
-        }else{
+        if (fs.existsSync(path)) {
+            this.jsonStr = fs.readFileSync(path, { encoding: 'utf-8' })
+        } else {
             this.jsonStr = '{}'
         }
         try {
@@ -15,10 +15,10 @@ export default class Database {
             for (const key in dataObject) {
                 this.data.set(key, dataObject[key])
             }
-        }catch{
+        } catch {
 
         }
-        
+
     }
     updateFile() {
         const dataObject: any = {}
@@ -37,10 +37,13 @@ export default class Database {
         return undefined
     }
     set(key: string, value: any) {
-        if(key || key === ''){
+        if (!key || key === '') {
             throw new Error('Key cannot be null')
         }
         this.data.set(key, value)
         this.updateFile()
+    }
+    has(key: string) {
+        return this.data.has(key)
     }
 }
